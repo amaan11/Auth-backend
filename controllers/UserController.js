@@ -4,7 +4,7 @@ import { authenticate, register } from "../models/User";
 
 const router = express.Router();
 
-router.get("/login", async (req, res, next) => {
+router.post("/login", async (req, res, next) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -16,12 +16,12 @@ router.get("/login", async (req, res, next) => {
     if (!user) {
       response = {
         isSuccess: false,
-        response: "Invalid email/password"
+        data: "Invalid email/password"
       };
     } else {
       response = {
         isSuccess: true,
-        response: user
+        data: user
       };
     }
 
@@ -39,11 +39,14 @@ router.post("/register", async (req, res, next) => {
   }
   try {
     const response = await register(fullName, email, password, contact);
-    if (response.status == "success") {
-      return res.status(400).send(response.data);
+    let status = "";
+
+    if (response.isSuccess === true) {
+      status = "200";
     } else {
-      return res.status(500).send(response.message);
+      status = "500";
     }
+    return res.status(status).json(response);
   } catch (error) {
     return res.status(500).send(error);
   }

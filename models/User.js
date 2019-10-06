@@ -38,29 +38,23 @@ const authenticate = async (email, password) => {
   return user;
 };
 const register = async (fullname, email, password, contact) => {
-  await User.create(
-    {
-      full_name: fullname,
-      email: email,
-      password: password,
-      contact: contact
-    },
-    (error, result) => {
-      if (error) {
-        return res.json({
-          status: "failure",
-          message: "User Cannot Be added successfully!!!",
-          data: error
-        });
-      } else {
-        return res.json({
-          status: "success",
-          message: "User added successfully!!!",
-          data: result
-        });
-      }
-    }
-  );
+  let response = {};
+  await User.create({
+    full_name: fullname,
+    email: email,
+    password: password,
+    contact: contact
+  })
+    .then(res => {
+      response["isSuccess"] = true;
+      response["data"] = res;
+    })
+    .catch(error => {
+      response["isSuccess"] = true;
+      response["data"] = error;
+    });
+
+  return response;
 };
 
 export { User, authenticate, register };

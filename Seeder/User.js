@@ -2,8 +2,6 @@ import { User } from "../models/User";
 
 const UserSeeder = async () => {
   try {
-    // const users = await User.findAll({ where: {} });
-    await User.destroy({ where: {} });
     await User.bulkCreate([
       {
         full_name: "Amaan Salheen",
@@ -18,9 +16,7 @@ const UserSeeder = async () => {
         contact: "9898787867"
       }
     ]);
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 };
 
 UserSeeder();
