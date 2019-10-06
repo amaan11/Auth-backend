@@ -16,3 +16,5 @@ npm install
 # Start the server
 npm start
 ```
+
+The server will start on port 8000
