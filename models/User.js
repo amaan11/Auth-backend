@@ -50,7 +50,7 @@ const register = async (fullname, email, password, contact) => {
       response["data"] = res;
     })
     .catch(error => {
-      response["isSuccess"] = true;
+      response["isSuccess"] = false;
       response["data"] = error;
     });
 

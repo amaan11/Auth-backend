@@ -1,9 +1,11 @@
 import express from "express";
 import sequelize from "./utils/database";
 import bodyParser from "body-parser";
-import User from "./models/User";
+import { TableBooking, User } from "./models";
 import UserSeeder from "./Seeder/User";
-import userController from "./controllers/UserController";
+import UserController from "./controllers/UserController";
+import BookingController from "./controllers/BookingController";
+
 import cors from "cors";
 
 const app = express();
@@ -17,7 +19,8 @@ app.use(cors());
 
 const port = process.env.PORT || "8000";
 
-app.use(userController);
+app.use(UserController);
+app.use(BookingController);
 
 sequelize
   .sync()

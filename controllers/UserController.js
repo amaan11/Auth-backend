@@ -1,5 +1,4 @@
 import express from "express";
-import User from "../models/User";
 import { authenticate, register } from "../models/User";
 
 const router = express.Router();
