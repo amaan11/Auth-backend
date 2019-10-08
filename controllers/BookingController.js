@@ -10,7 +10,8 @@ Router.post("/book-table", async (req, res, next) => {
     bookingTime,
     sessionType,
     fullName,
-    contact
+    contact,
+    guestCount
   } = req.body;
 
   //Validate restaurant Id
@@ -24,7 +25,8 @@ Router.post("/book-table", async (req, res, next) => {
     !bookingTime ||
     !sessionType ||
     !fullName ||
-    !contact
+    !contact ||
+    !guestCount
   ) {
     response["isSuccess"] = false;
     response["data"] = "Missing Input!Please Provide all required inputs";

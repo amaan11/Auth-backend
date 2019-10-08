@@ -36,6 +36,12 @@ const TableBooking = sequelize.define("table_booking", {
     allowNull: false,
     autoIncrement: false,
     primaryKey: false
+  },
+  no_of_guests: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    autoIncrement: false,
+    primaryKey: false
   }
 });
 
@@ -46,7 +52,8 @@ const bookTable = async request => {
     bookingTime,
     sessionType,
     fullName,
-    contact
+    contact,
+    guestCount
   } = request;
 
   let response = {};
@@ -57,7 +64,8 @@ const bookTable = async request => {
     booking_time: bookingTime,
     session_type: sessionType,
     full_name: fullName,
-    contact_number: contact
+    contact_number: contact,
+    no_of_guests: guestCount
   })
     .then(res => {
       response["isSuccess"] = true;
